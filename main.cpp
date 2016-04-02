@@ -7,45 +7,38 @@ void drawCharSquare(char **square, int n);
 
 int main(int argc, char **argv)
 {
-
-
-int n = atoi(argv[1]);
-int seed = atoi(argv[2]);
-srand(argc == 3 ? seed : time(NULL));
-drawCharSquare(charSquare(n), n);
+	int n = atoi(argv[1]);
+	int seed = atoi(argv[2]);
+	srand(argc==3 ? seed : time(NULL));
+	drawCharSquare(charSquare(n), n);	
 }
 
 char **charSquare(int n)
 {
-char **square = new char * [n];
-int w = n; //Wysokosc
-int s = n; //Szerokosc
+	char **square = new char*[n];
+	for(int i = 0; i<n; i++){
+		square[i] = new char[n];
+	}
+	int x;
+	int y;
+	for(int i = 0; i<n*n; i++){
+		x = i/n;
+		y = i%n;
+		square[x][y]='a'+rand()%26;
+			}
 
-for(int i = 0; i < n; i++)
-{
-square[i] = new char[n];
-}
-for(int i = 0 ; i < (w * s) ; i++)
-{
-square[i % s][i / s] = ( ( rand() % ( 'z' - 'a' ) ) + 'a' );
-}
-
-
-
-return square;
+	return square;
 }
 
 void drawCharSquare(char **square, int n)
 {
-int w = n;
-int s = n;
-for(int i = 0 ; i < (w * s) ; i++)
-{
-printf("%c", square[i % s][i / s]);
-if(i%s==n-1){
-	printf("\n");
-}
-}
-
+	for(int i = 0; i<n*n; i++){
+		int x = i/n;
+		int y = i%n;
+		printf("%c ", square[x][y]);
+		if(y==n-1){
+			printf("\n");
+		}
+	}
 
 }
